@@ -7,7 +7,7 @@ public class Vaga {
     private Integer id;
     private String cargo;
     private String cidade;
-    private Integer formaContratacao;
+    private String formaContratacao;
     private Integer idUsuario;
     private List<Criterio> criterioList;
 
@@ -38,11 +38,11 @@ public class Vaga {
         this.cidade = cidade;
     }
 
-    public Integer getFormaContratacao() {
+    public String getFormaContratacao() {
         return formaContratacao;
     }
 
-    public void setFormaContratacao(Integer formaContratacao) {
+    public void setFormaContratacao(String formaContratacao) {
         this.formaContratacao = formaContratacao;
     }
 

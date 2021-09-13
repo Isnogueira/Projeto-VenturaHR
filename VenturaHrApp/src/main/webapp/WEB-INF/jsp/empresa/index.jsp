@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -17,11 +16,12 @@
 <head>
 <body>
 	<div class=container>
-		<h4>Bem vindo(a) ${user.nome} !</h4>
+		<h4>Bem vindo ${user.razaoSocial} !</h4>
 	</div>
 	<div class="container">
 		<h3>Vagas publicadas</h3>
 		<c:if test="${not empty vagas}">
+			<a href=""></a>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -38,7 +38,7 @@
 							<td>${vaga.id}</td>
 							<td>${vaga.cargo}</td>
 							<td>${vaga.cidade}</td>
-							<td>${vaga.formaContratação}</td>
+							<td>${vaga.formaContratacao}</td>
 							<td>
 								<c:forEach var="criterio" items="${vaga.criterioList}">
                             		${criterio.descricao} <br>
@@ -52,7 +52,8 @@
 		<c:if test="${empty vagas}">
 			<div class="container">
 				<h3>
-					Não há vagas publicadas
+					Não há vagas publicadas | 
+					<a href=""></a>
 				</h3>
 			</div>
 		</c:if>

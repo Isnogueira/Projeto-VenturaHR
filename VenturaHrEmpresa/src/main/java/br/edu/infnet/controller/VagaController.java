@@ -4,6 +4,7 @@ import br.edu.infnet.model.domain.Criterio;
 import br.edu.infnet.model.domain.Vaga;
 import br.edu.infnet.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.convert.Jsr310Converters.StringToLocalDateConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +19,14 @@ public class VagaController {
     private VagaRepository vagaRepository;
     
        	
-    @GetMapping(path = "/usuario/{idUsuario}")
+    @GetMapping(value = "/usuario/{idUsuario}")
     public ResponseEntity listarPorIdUsuario(@PathVariable Integer idUsuario){
         
     	List<Vaga> lista = vagaRepository.findByIdUsuario(idUsuario);
 
         return ResponseEntity.ok().body(lista);
     }
+    
     
 
     @PostMapping

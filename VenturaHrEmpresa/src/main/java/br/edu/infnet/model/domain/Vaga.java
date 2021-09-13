@@ -13,9 +13,9 @@ public class Vaga {
     private String cargo;
     private String formaContratacao;
     private String cidade;
-    @Column(name = "id_usuario", nullable = false)
     private Integer idUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vaga")
+    
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Criterio> criterioList;
 
     public Vaga() {

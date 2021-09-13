@@ -3,6 +3,7 @@ package br.edu.infnet.controller;
 import br.edu.infnet.model.domain.Usuario;
 import br.edu.infnet.model.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
-    @GetMapping(value = {"/{id}"})
     
+    
+    @GetMapping(path = {"/{id}"})
     public ResponseEntity<Usuario> obterPorId(@PathVariable Integer id){
 
         ResponseEntity<Usuario> retorno = ResponseEntity.notFound().build();
@@ -39,7 +40,7 @@ public class UsuarioController {
             return retorno;
     }
 
-    @GetMapping(value = "/email/{email}")
+    @GetMapping(path = "/email/{email}")
     public ResponseEntity<Usuario> obterPorEmail(@PathVariable String email){
 
         ResponseEntity<Usuario> retorno = ResponseEntity.notFound().build();
@@ -62,7 +63,7 @@ public class UsuarioController {
         if (usuario != null && usuario.getId() == null){
 
             Usuario usuarioInserido = usuarioRepository.save(usuario);
-            retorno = ResponseEntity.ok().body(usuarioInserido);
+            retorno = ResponseEntity.status(HttpStatus.CREATED).body(usuarioInserido);
         }
 
         return retorno;

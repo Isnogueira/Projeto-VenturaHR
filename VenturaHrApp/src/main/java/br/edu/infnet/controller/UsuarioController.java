@@ -1,5 +1,6 @@
 package br.edu.infnet.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,15 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
     private VagaService vagaService;
+    
     
     @GetMapping(value = "/registro")
     public String telaRegistro(){
         return "/usuario/registro";
     }
+    
   
     
     @PostMapping(value = "/registro")
@@ -37,15 +41,22 @@ public class UsuarioController {
        model.addAttribute("user", usuario);
 
        String caixaEntrada = null;
-
+       
         if(usuario.getTipo() == Usuario.EMPRESA){
+        
+        	List<Vaga> vagas = new ArrayList<Vaga>();
         	
-           List<Vaga> vagas = vagaService.listarPorIdUsuario(usuario.getId());
+        	if(!vagas.isEmpty()) {
+        		
+        		vagas = vagaService.listarPorIdUsuario(String.valueOf(usuario.getId()));
            
-           model.addAttribute("vagas", vagas);
+        		model.addAttribute("vagas", vagas);
 
-            caixaEntrada = "/empresa/index";
-
+        	}else {
+        		caixaEntrada = "/empresa/index";
+        	}
+        	
+        	
         } else if(usuario.getTipo() == Usuario.CANDIDATO){
             caixaEntrada = "/candidato/index";
 

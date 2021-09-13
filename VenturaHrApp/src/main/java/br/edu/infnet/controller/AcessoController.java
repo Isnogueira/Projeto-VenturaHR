@@ -27,6 +27,7 @@ public class AcessoController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
     private VagaService vagaService;
 
 
@@ -35,10 +36,10 @@ public class AcessoController {
         return "/login";
     }
     
-    @GetMapping(value = "/vagas/{id}")
-    public ModelAndView listarVagas(@PathVariable String id) {
+    @GetMapping(value = "/vagas/usuario/{idUsuario}")
+    public ModelAndView listarPorIdUsuario(@PathVariable String idUsuario) {
         
-    	List<Vaga> vagas = vagaService.listarPorIdUsuario(Integer.parseInt(id));
+    	List<Vaga> vagas = vagaService.listarPorIdUsuario(idUsuario);
         
         ModelAndView response = new ModelAndView("/empresa/index");
         
@@ -60,7 +61,7 @@ public class AcessoController {
 
             if(usuario.getTipo() == Usuario.EMPRESA){
 
-                List<Vaga> vagas = vagaService.listarPorIdUsuario(usuario.getId());
+                List<Vaga> vagas = vagaService.listarPorIdUsuario(String.valueOf(usuario.getId()));
                 model.addAttribute("vagas", vagas);
 
                 caixaEntrada = "/empresa/index";
