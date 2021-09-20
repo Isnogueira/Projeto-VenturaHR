@@ -13,19 +13,59 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+.navbar {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	font-size: 12px;
+	letter-spacing: 5px;
+}
+
+.navbar-nav li a:hover {
+	color: #1abc9c !important;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
+	color: #000066;
+	height: 100vh;
+}
+
+.bg-4 {
+	background-color: #000066;
+	color: #ffffff;
+	padding: 15px;
+}
+
+
+.bg-3 {
+	background-color: #ffffff;
+	color: #000066;
+}
+
+.container-fluid {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+</style>
 <head>
 <body>
+	<c:import url="/WEB-INF/jsp/menu.jsp" />
+	<br>
 	<div class=container>
-		<h4>Bem vindo ${user.razaoSocial} !</h4>
-	</div>
-	<div class="container">
-		<h3>Vagas publicadas</h3>
 		<c:if test="${not empty vagas}">
-			<a href=""></a>
+			<div class="container-fluid bg-3 text-center">
+				<h3>Vagas publicadas</h3>
+				<a href="/publicar" class="btn btn-primary">Publicar Vaga</a>
+			</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>ID</th>
 						<th>Cargo</th>
 						<th>Cidade</th>
 						<th>Forma de contratação</th>
@@ -35,15 +75,12 @@
 				<tbody>
 					<c:forEach var="vaga" items="${vagas}">
 						<tr>
-							<td>${vaga.id}</td>
 							<td>${vaga.cargo}</td>
 							<td>${vaga.cidade}</td>
 							<td>${vaga.formaContratacao}</td>
-							<td>
-								<c:forEach var="criterio" items="${vaga.criterioList}">
-                            		${criterio.descricao} <br>
-								</c:forEach>
-							</td>
+							<td><c:forEach var="criterio" items="${vaga.criterioList}">
+	                           		${criterio.descricao} <br>
+								</c:forEach></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -51,12 +88,13 @@
 		</c:if>
 		<c:if test="${empty vagas}">
 			<div class="container">
-				<h3>
-					Não há vagas publicadas | 
-					<a href=""></a>
-				</h3>
+				<div class="container-fluid bg-3 text-center">
+					<h3>Não há vagas publicadas</h3>
+					<a href="/publicar" class="btn btn-primary">Publicar Vaga</a>
+				</div>
 			</div>
 		</c:if>
 	</div>
+	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </body>
 </html>

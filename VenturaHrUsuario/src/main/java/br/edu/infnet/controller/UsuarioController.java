@@ -68,7 +68,6 @@ public class UsuarioController {
 
         return retorno;
 
-        //todo Fazer mais validações
     }
 
     @PutMapping

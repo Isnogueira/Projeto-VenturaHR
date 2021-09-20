@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,28 +23,30 @@ public class VagaController {
 
 	@Autowired
 	private VagaService vagaService;
-
-	
-	 @GetMapping(value = "/vaga/publicar")
-	 public String telaVaga() {
-	     return "/empresa/publicar";
-	 }
 	 
 	
-    @PostMapping(value = "/vagas/salvar")
+	  @GetMapping(value = "/publicar")
+	    public String telaPublicar() {
+	        return "/empresa/vaga";
+	    }
+
+	  
+    @PostMapping(value = "/descricao")
     public ModelAndView salvarVaga(Vaga vaga, HttpServletRequest request){
 
-        ModelAndView resposta = new ModelAndView("/empresa/index");
+        ModelAndView resposta = new ModelAndView("/empresa/vaga");
         HttpSession sessao = request.getSession();
         sessao.setAttribute("vaga", vaga);
 
         return resposta;
     }
+    
+    
 
-    @PostMapping(value = "/criterios/salvar")
+    @PostMapping(value = "/criterios")
     public ModelAndView salvarCriterios(Criterio criterio, HttpServletRequest request){
 
-        ModelAndView resposta = new ModelAndView("/empresa/index");
+        ModelAndView resposta = new ModelAndView("/empresa/vaga");
         HttpSession sessao = request.getSession();
         List<Criterio> criterios = (List<Criterio>)sessao.getAttribute("criterios");
 
@@ -59,21 +62,28 @@ public class VagaController {
     }
 
     
-    @PostMapping(value = "/vaga/publicar")
-    public String post(HttpServletRequest request) {
+    @PostMapping(value = "/publicar")
+    public String publicarVaga(HttpServletRequest request, Model model) { 
+    
+    	HttpSession sessao = request.getSession();
     	
-	    HttpSession session = request.getSession();
+    	Usuario usuario = (Usuario) sessao.getAttribute("user");
+    	
+	    Vaga vaga = (Vaga) sessao.getAttribute("vaga");
 	    
-	    Usuario usuario = (Usuario) session.getAttribute("user");
+	    vaga.setIdUsuario(usuario.getId());
 	    
-	    Vaga vaga = (Vaga) session.getAttribute("vaga");
-	    
-	    List<Criterio> criterio = (List) session.getAttribute("criterio");
-	    
-	    vaga.setCriterioList(criterio);
-	    
-	   // vagaService.publicarVaga(vaga);
-	    return "redirect:/empresa/index/" + usuario.getId();
+	   List<Criterio> criterios = (List<Criterio>) sessao.getAttribute("criterios");
+	     
+	    vaga.setCriterioList(criterios);
+	   
+	   vagaService.publicarVaga(vaga);
+	   
+	   List<Vaga> vagas = vagaService.listarPorIdUsuario(String.valueOf(usuario.getId()));
+	   
+	   model.addAttribute("vagas", vagas);
+	
+	    return "/empresa/index";
     }
 
 }

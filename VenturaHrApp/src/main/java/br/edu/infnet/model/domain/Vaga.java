@@ -1,5 +1,6 @@
 package br.edu.infnet.model.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vaga {
@@ -12,6 +13,8 @@ public class Vaga {
     private List<Criterio> criterioList;
 
     public Vaga() {
+    	
+    	criterioList = new ArrayList<>();
     }
 
     public Integer getId() {

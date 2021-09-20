@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="pt-BR">
 <head>
 <title>Registrar</title>
@@ -12,27 +13,85 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+.navbar {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	font-size: 12px;
+	letter-spacing: 5px;
+}
+
+.navbar-nav li a:hover {
+	color: #1abc9c !important;
+}
+
+.navbar-brand {
+	color: #000066
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
+	color: #000066;
+	height: 100vh;
+}
+
+.bg-3 {
+	background-color: #ffffff;
+	color: #000066;
+}
+
+.bg-4 {
+	background-color: #000066;
+	color: #ffffff;
+	padding: 15px;
+}
+
+.container-fluid {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+</style>
 <head>
 <body>
+	<c:import url="/WEB-INF/jsp/menu.jsp" />
+	<div class="container-fluid bg-3 text-center">
+		<h3>Registrar</h3>
+	</div>
 	<form action="/registro" method="post">
-		<div class="container text-center">
-			<h2>Registrar</h2>
-		</div>
 		<br>
 		<div class="container">
+			<c:if test="${not empty mensagemEmail}">
+				<div class="alert alert-danger">
+					<strong>ERRO: </strong>${mensagemEmail}
+				</div>
+			</c:if>
 			<label for="email">E-mail:</label> <input type="email"
 				class="form-control" placeholder="Entre com o e-mail" name="email">
 		</div>
 		<br>
 		<div class="container">
+			<c:if test="${not empty mensagemSenha}">
+				<div class="alert alert-danger">
+					<strong>ERRO: </strong>${mensagemSenha}
+				</div>
+			</c:if>
 			<label for="senha">Senha:</label> <input type="password"
 				class="form-control" placeholder="Entre com a senha" name="senha">
 		</div>
 		<br>
 		<div class="container">
+			<c:if test="${not empty mensagemTelefone}">
+				<div class="alert alert-danger">
+					<strong>ERRO: </strong>${mensagemTelefone}
+				</div>
+			</c:if>
 			<label for="telefone">Telefone:</label> <input type="number"
-				class="form-control" placeholder="xx xxxxx-xxxx"
-				name="telefone">
+				class="form-control" value="0" name="telefone">
 		</div>
 		<br>
 
@@ -40,8 +99,8 @@
 			<h4>Escolha o tipo da conta:</h4>
 			<br>
 			<div class="radio">
-				<label><input type="radio" name="tipo" value="C" checked>Candidato</label>
-				<label><input type="radio" name="tipo" value="E">Empresa</label>
+				<label><input type="radio" name="tipo" value='C' checked>Candidato</label>
+				<label><input type="radio" name="tipo" value='E'>Empresa</label>
 			</div>
 		</div>
 		<hr>
@@ -50,26 +109,45 @@
 		</div>
 		<br>
 		<div class="container">
+			<c:if test="${not empty mensagemNome}">
+				<div class="alert alert-danger">
+					<strong>ERRO: </strong>${mensagemNome}
+				</div>
+			</c:if>
 			<label for="nome">Nome:</label> <input type="text"
 				class="form-control" placeholder="Entre com o nome" name="nome">
 		</div>
 		<br>
 		<div class="container">
+			<c:if test="${not empty mensagemCpf}">
+				<div class="alert alert-danger">
+					<strong>ERRO: </strong>${mensagemCpf}
+				</div>
+			</c:if>
 			<label for="cpf">CPF:</label> <input type="text" class="form-control"
 				placeholder="Entre com o CPF" name="cpf">
 		</div>
 		<hr>
 		<div class="container">
-
 			<h3>Se você é Empresa</h3>
 		</div>
 		<br>
 		<div class="container">
-			<label for="cnpj">CNPJ:</label> <input type="number"
+		<c:if test="${not empty mensagemCnpj}">
+				<div class="alert alert-danger">
+					<strong>ERRO: </strong>${mensagemCnpj}
+				</div>
+			</c:if>
+			<label for="cnpj">CNPJ:</label> <input type="text"
 				class="form-control" placeholder="Entre com o cnpj" name="cnpj">
 		</div>
 		<br>
 		<div class="container">
+		<c:if test="${not empty mensagemRazaoSocial}">
+				<div class="alert alert-danger">
+					<strong>ERRO: </strong>${mensagemRazaoSocial}
+				</div>
+			</c:if>
 			<label for="razaoSocial">Razão social:</label> <input type="text"
 				class="form-control" placeholder="Entre com a Razão Social"
 				name="razaoSocial">
@@ -84,5 +162,6 @@
 		</div>
 		<br>
 	</form>
+	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </body>
 </html>

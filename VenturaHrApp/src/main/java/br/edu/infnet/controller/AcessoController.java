@@ -32,21 +32,25 @@ public class AcessoController {
 
 
     @GetMapping(value="/")
-    public String Telalogin(){
+    public String telaInicial(){
+    	return "/index";
+    }
+    @GetMapping(value="/login")
+    public String telalogin(){
         return "/login";
     }
     
-    @GetMapping(value = "/vagas/usuario/{idUsuario}")
-    public ModelAndView listarPorIdUsuario(@PathVariable String idUsuario) {
+    @GetMapping(path = "/usuario/{idUsuario}")
+    public String listarPorIdUsuario(Model model, @PathVariable String idUsuario) {
         
     	List<Vaga> vagas = vagaService.listarPorIdUsuario(idUsuario);
+    	   
+    	   model.addAttribute("vagas", vagas);
         
-        ModelAndView response = new ModelAndView("/empresa/index");
-        
-        response.addObject("vagas", vagas);
-        
-        return response;
+        return "/empresa/index";
     }
+    
+    
 
     @PostMapping (value = "/login")
     public String login(Model model, @RequestParam String email, @RequestParam String senha){

@@ -13,9 +13,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<head>
 <style>
 .navbar {
-	background-color;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	border: 0;
@@ -29,12 +29,10 @@
 	color: #1abc9c !important;
 }
 
-
 body {
 	margin: 0;
 	padding: 0;
 	background-color: #ffffff;
-	color:#000066;
 	height: 100vh;
 }
 
@@ -47,21 +45,30 @@ body {
 .bg-3 {
 	background-color: #ffffff;
 	color: #000066;
+	
 
 }
-
 .container-fluid {
 	padding-top: 70px;
 	padding-bottom: 70px;
-	
+}
+
+.jumbotron {
+	background-color: #000066;
+	color: #fff;
+	padding: 100px 50px;
 }
 </style>
-<head>
 <body>
 	<c:import url="/WEB-INF/jsp/menu.jsp" />
-	<br>
-	<div class="container">
-		<h3>Bem vindo(a) ${user.nome} !!</h3>
+	<div class="jumbotron text-center">
+		<h1>Ventura HR</h1>
+		<p>Projeto de bloco do Bloco de Java do Instituto Infnet</p>
+		<p>Desenvolvido por Ingrid Nogueira</p>
+		<c:if test="${empty user}">
+			<a href="/registro" class="btn btn-default btn-lg">Registre-se
+				aqui</a>
+		</c:if>
 	</div>
 	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </body>

@@ -1,7 +1,7 @@
 package br.edu.infnet.controller;
 
 import br.edu.infnet.model.domain.Candidato;
-import br.edu.infnet.model.service.CandidatoService;
+//import br.edu.infnet.model.service.CandidatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CandidatoController {
 
-    @Autowired
+    /*@Autowired
     private CandidatoService candidatoService;
 
 
@@ -29,5 +29,5 @@ public class CandidatoController {
         model.addAttribute("mensagem", "Bem vindo(a) " + candidato.getNome());
 
         return "/index";
-    }
+    }*/
 }

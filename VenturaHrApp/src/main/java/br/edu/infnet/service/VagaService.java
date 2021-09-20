@@ -17,6 +17,7 @@ public interface VagaService {
     @GetMapping(value ="/usuario/{idUsuario}")
     List<Vaga> listarPorIdUsuario(@PathVariable String idUsuario);
     
-   // @PostMapping
-    //Vaga publicarVaga(Vaga vaga);
+    
+    @PostMapping
+    Vaga publicarVaga(Vaga vaga);
 }   

@@ -26,8 +26,6 @@ public class VagaController {
 
         return ResponseEntity.ok().body(lista);
     }
-    
-    
 
     @PostMapping
     public ResponseEntity publicarVaga(@RequestBody Vaga vaga){
