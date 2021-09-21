@@ -15,7 +15,7 @@ import java.util.List;
 public interface VagaService {
 
     @GetMapping(value ="/usuario/{idUsuario}")
-    List<Vaga> listarPorIdUsuario(@PathVariable String idUsuario);
+    List<Vaga> listarPorIdUsuario(@PathVariable Integer idUsuario);
     
     
     @PostMapping

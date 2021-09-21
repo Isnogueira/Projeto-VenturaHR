@@ -79,7 +79,7 @@ public class VagaController {
 	   
 	   vagaService.publicarVaga(vaga);
 	   
-	   List<Vaga> vagas = vagaService.listarPorIdUsuario(String.valueOf(usuario.getId()));
+	   List<Vaga> vagas = vagaService.listarPorIdUsuario(usuario.getId());
 	   
 	   model.addAttribute("vagas", vagas);
 	

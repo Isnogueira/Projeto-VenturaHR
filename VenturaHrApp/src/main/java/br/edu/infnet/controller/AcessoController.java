@@ -40,17 +40,6 @@ public class AcessoController {
         return "/login";
     }
     
-    @GetMapping(path = "/usuario/{idUsuario}")
-    public String listarPorIdUsuario(Model model, @PathVariable String idUsuario) {
-        
-    	List<Vaga> vagas = vagaService.listarPorIdUsuario(idUsuario);
-    	   
-    	   model.addAttribute("vagas", vagas);
-        
-        return "/empresa/index";
-    }
-    
-    
 
     @PostMapping (value = "/login")
     public String login(Model model, @RequestParam String email, @RequestParam String senha){
@@ -61,11 +50,11 @@ public class AcessoController {
 
             model.addAttribute("user", usuario);
 
-            String caixaEntrada = null;
+            String caixaEntrada;
 
             if(usuario.getTipo() == Usuario.EMPRESA){
 
-                List<Vaga> vagas = vagaService.listarPorIdUsuario(String.valueOf(usuario.getId()));
+                List<Vaga> vagas = vagaService.listarPorIdUsuario(usuario.getId());
                 model.addAttribute("vagas", vagas);
 
                 caixaEntrada = "/empresa/index";
