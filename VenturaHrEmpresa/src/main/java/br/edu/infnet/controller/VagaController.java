@@ -30,8 +30,22 @@ public class VagaController {
     @PostMapping
     public ResponseEntity publicarVaga(@RequestBody Vaga vaga){
 
-        ResponseEntity retorno = ResponseEntity.badRequest().build();
+        ResponseEntity retorno = null;
 
+       if(vaga.getCargo().isBlank() || vaga.getCidade().isBlank() || vaga.getFormaContratacao().isBlank()){
+    	   
+    	   retorno = ResponseEntity.badRequest().build();
+    	   
+    	   return retorno; 
+       }
+       
+       if(vaga.getCargo().isBlank() && vaga.getCidade().isBlank() && vaga.getFormaContratacao().isBlank()){
+    	   
+    	   retorno = ResponseEntity.badRequest().build();
+    	   
+    	   return retorno; 
+       }
+            
         List<Criterio> listaCriterio = vaga.getCriterioList();
 
         if(listaCriterio != null && !listaCriterio.isEmpty()){
