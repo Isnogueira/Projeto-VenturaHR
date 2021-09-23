@@ -55,21 +55,46 @@ public class UsuarioController {
         return retorno;
     }
 
+    
     @PostMapping
     public ResponseEntity<Usuario> criarConta(@RequestBody Usuario usuario){
+    	
+    	
+    	ResponseEntity<Usuario> retorno = null;	
 
-        ResponseEntity<Usuario> retorno = ResponseEntity.badRequest().build();
+    	if (usuario.getEmail().isBlank() || usuario.getSenha().isBlank()) {
+
+    		 retorno = ResponseEntity.badRequest().build();
+			
+    		 return retorno;
+		}
+    	
+		if (usuario.getEmail().isBlank() && usuario.getSenha().isBlank()) {
+
+			 retorno = ResponseEntity.badRequest().build();
+
+			return retorno;
+		}
+		
+		if (usuario.getTelefone() == 0) {
+			
+			retorno = ResponseEntity.badRequest().build();
+
+			return retorno;
+		}
+		
 
         if (usuario != null && usuario.getId() == null){
 
             Usuario usuarioInserido = usuarioRepository.save(usuario);
             retorno = ResponseEntity.status(HttpStatus.CREATED).body(usuarioInserido);
         }
-
+        
         return retorno;
-
+        
     }
 
+    
     @PutMapping
     public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario){
 

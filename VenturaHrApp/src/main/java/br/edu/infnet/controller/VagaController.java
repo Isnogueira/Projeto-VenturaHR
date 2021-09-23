@@ -33,9 +33,10 @@ public class VagaController {
 	  
     @PostMapping(value = "/descricao")
     public ModelAndView salvarVaga(Vaga vaga, HttpServletRequest request){
-
-        ModelAndView resposta = new ModelAndView("/empresa/vaga");
-        HttpSession sessao = request.getSession();
+		
+    	ModelAndView resposta = new ModelAndView("/empresa/vaga");
+		HttpSession sessao = request.getSession();
+    
         sessao.setAttribute("vaga", vaga);
 
         return resposta;

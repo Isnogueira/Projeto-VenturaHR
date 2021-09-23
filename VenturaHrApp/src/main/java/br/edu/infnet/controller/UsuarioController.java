@@ -25,6 +25,7 @@ public class UsuarioController {
 	@Autowired
 	private VagaService vagaService;
 
+	
 	@GetMapping(value = "/registro")
 	public String telaRegistro() {
 		return "/usuario/registro";
@@ -138,10 +139,12 @@ public class UsuarioController {
              caixaEntrada = "/empresa/index";
 
          } else if(usuario.getTipo() == Usuario.CANDIDATO){
-             caixaEntrada = "/candidato/index";
+             
+        	 caixaEntrada = "/candidato/index";
 
          } else{
-             caixaEntrada="/administrador/index";
+             
+        	 caixaEntrada="/administrador/index";
          }
 
          return caixaEntrada;
