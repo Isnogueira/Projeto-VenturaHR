@@ -59,9 +59,12 @@ body {
 <head>
 <body>
 	<c:import url="/WEB-INF/jsp/menu.jsp" />
-	<br>
 	<div class="container">
 		<h3>Bem vindo(a) ${user.nome} !!</h3>
+	</div>
+	<br>
+	<div class="container">
+		<a href="/" class="btn btn-primary btn-block">Voltar</a>
 	</div>
 	<c:import url="/WEB-INF/jsp/footer.jsp" />
 </body>

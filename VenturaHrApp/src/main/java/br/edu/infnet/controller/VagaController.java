@@ -23,68 +23,68 @@ public class VagaController {
 
 	@Autowired
 	private VagaService vagaService;
-	 
-	
-	  @GetMapping(value = "/publicar")
-	    public String telaPublicar() {
-	        return "/empresa/vaga";
-	    }
 
-	  
-    @PostMapping(value = "/descricao")
-    public ModelAndView salvarVaga(Vaga vaga, HttpServletRequest request){
-		
-    	ModelAndView resposta = new ModelAndView("/empresa/vaga");
+	@GetMapping(value = "/publicar")
+	public String telaPublicar() {
+		return "/empresa/vaga";
+	}
+
+	@PostMapping(value = "/descricao")
+	public ModelAndView salvarVaga(Vaga vaga, HttpServletRequest request) {
+
+		ModelAndView resposta = new ModelAndView("/empresa/vaga");
 		HttpSession sessao = request.getSession();
-    
-        sessao.setAttribute("vaga", vaga);
 
-        return resposta;
-    }
-    
-    
+		sessao.setAttribute("vaga", vaga);
 
-    @PostMapping(value = "/criterios")
-    public ModelAndView salvarCriterios(Criterio criterio, HttpServletRequest request){
+		return resposta;
+	}
 
-        ModelAndView resposta = new ModelAndView("/empresa/vaga");
-        HttpSession sessao = request.getSession();
-        List<Criterio> criterios = (List<Criterio>)sessao.getAttribute("criterios");
+	@PostMapping(value = "/criterios")
+	public ModelAndView salvarCriterios(Criterio criterio, HttpServletRequest request) {
 
-        if(criterios == null){
+		ModelAndView resposta = new ModelAndView("/empresa/vaga");
+		HttpSession sessao = request.getSession();
+		
+		List<Criterio> criterios = (List<Criterio>) sessao.getAttribute("criterios");
 
-            criterios = new ArrayList<>();
-        }
+		if (criterios == null) {
 
-        criterios.add(criterio);
-        sessao.setAttribute("criterios", criterios);
+			criterios = new ArrayList<>();
+		}
 
-        return resposta;
-    }
+		criterios.add(criterio);
+		sessao.setAttribute("criterios", criterios);
 
-    
-    @PostMapping(value = "/publicar")
-    public String publicarVaga(HttpServletRequest request, Model model) { 
-    
-    	HttpSession sessao = request.getSession();
-    	
-    	Usuario usuario = (Usuario) sessao.getAttribute("user");
-    	
-	    Vaga vaga = (Vaga) sessao.getAttribute("vaga");
-	    
-	    vaga.setIdUsuario(usuario.getId());
-	    
-	   List<Criterio> criterios = (List<Criterio>) sessao.getAttribute("criterios");
-	     
-	    vaga.setCriterioList(criterios);
-	   
-	   vagaService.publicarVaga(vaga);
-	   
-	   List<Vaga> vagas = vagaService.listarPorIdUsuario(usuario.getId());
-	   
-	   model.addAttribute("vagas", vagas);
-	
-	    return "/empresa/index";
-    }
+		return resposta;
+	}
+
+	@PostMapping(value = "/publicar")
+	public String publicarVaga(HttpServletRequest request, Model model) {
+
+		HttpSession sessao = request.getSession();
+
+		Usuario usuario = (Usuario) sessao.getAttribute("user");
+
+		Vaga vaga = (Vaga) sessao.getAttribute("vaga");
+
+		vaga.setIdUsuario(usuario.getId());
+
+		List<Criterio> criterios = (List<Criterio>) sessao.getAttribute("criterios");
+
+		vaga.setCriterioList(criterios);
+
+		vagaService.publicarVaga(vaga);
+
+		List<Vaga> vagas = vagaService.listarPorIdUsuario(usuario.getId());
+
+		model.addAttribute("vagas", vagas);
+		
+		sessao.removeAttribute("vaga");
+		
+		sessao.removeAttribute("criterios");
+
+		return "/empresa/index";
+	}
 
 }

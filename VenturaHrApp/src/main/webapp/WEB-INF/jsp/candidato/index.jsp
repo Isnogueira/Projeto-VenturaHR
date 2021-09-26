@@ -57,7 +57,7 @@ body {
 <head>
 <body>
 	<c:import url="/WEB-INF/jsp/menu.jsp" />
-	<<div class="container">
+	<div class="container">
 		<h3>Bem vindo(a) ${user.nome} !!</h3>
 	</div>
 	<br>

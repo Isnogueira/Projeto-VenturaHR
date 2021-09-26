@@ -71,7 +71,7 @@ body {
 				</div>
 			</c:if>
 			<label for="email">E-mail:</label> <input type="email"
-				class="form-control" placeholder="Entre com o e-mail" name="email">
+				class="form-control" value="tech@tech.com" name="email">
 		</div>
 		<br>
 		<div class="container">
@@ -81,7 +81,7 @@ body {
 				</div>
 			</c:if>
 			<label for="senha">Senha:</label> <input type="password"
-				class="form-control" placeholder="Entre com a senha" name="senha">
+				class="form-control" value="123456" name="senha">
 		</div>
 		<br>
 		<div class="container">
@@ -99,13 +99,14 @@ body {
 			<h4>Escolha o tipo da conta:</h4>
 			<br>
 			<div class="radio">
-				<label><input type="radio" name="tipo" value='C' checked>Candidato</label>
+				<label><input type="radio" name="tipo" value='C'>Candidato</label>
 				<label><input type="radio" name="tipo" value='E'>Empresa</label>
+				<label><input type="radio" name="tipo" value='A'>Administrador</label>
 			</div>
 		</div>
 		<hr>
 		<div class="container">
-			<h3>Se você é Candidato</h3>
+			<h3>Se você é Candidato ou Administrador</h3>
 		</div>
 		<br>
 		<div class="container">

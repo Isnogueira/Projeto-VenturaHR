@@ -84,6 +84,26 @@ body {
 		</div>
 	</form>
 	<hr>
+	<div class="container">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Descrição</th>
+					<th>Perfil</th>
+					<th>Peso</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="criterio" items="${criterios}" varStatus="id">
+					<tr>
+						<td>${criterio.descricao}</td>
+						<td>${criterio.perfil}</td>
+						<td>${criterio.peso}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>	
 	<c:if test="${not empty vaga}">
 		<form action="/criterios" method="post">
 			<div class="container">
