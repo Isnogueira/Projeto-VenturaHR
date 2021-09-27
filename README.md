@@ -78,7 +78,8 @@ Pull requests são bem-vindas. Para grandes mudanças, abra uma issue primeiro p
 Certifique-se de atualizar os testes conforme apropriado.
 
 ## Autores
-Mostre sua gratidão àqueles que contribuíram para o projeto.
+* Armenio Torres 
+* Ingrid Nogueira
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
